@@ -548,6 +548,13 @@
 				</div>
 				<label for="toggle-permalink"><span class="copy-button" data-hotkey="G"></span></label>
 			</div>
+			<h2>Chat mini-challenge submission (Stack Exchange chat)</h2>
+			<div class="copy-entry">
+				<div class="copy-content">
+					<textarea data-base-height="48" data-format='[{{lang}}]({{link}}), {{bytes}}: [{{chatMarkdownCode}}]({{permalink}})'></textarea>
+				</div>
+				<label for="toggle-permalink"><span class="copy-button" data-hotkey="G"></span></label>
+			</div>
 			<h2>BBCode</h2>
 			<div class="copy-entry">
 				<div class="copy-content">
@@ -1166,6 +1173,10 @@
 		else
 			return code.replace(rNewLine, "    ");
 	}
+	
+	function codeToChatMarkdown(code) {
+		return "`"+code.replace("`", "\\`")+"`";
+	}
 
 	function getSettings(arguments) {
 		var retval = "/";
@@ -1289,6 +1300,7 @@
 				var data = {
 					"bytes": pluralization(countBytes(code, language.encoding), "byte"),
 					"markdownCode": codeToMarkdown(code),
+					"chatMarkdownCode": codeToCharMarkdown(code),
 					"prettifyHint": language.prettify ? "<!-- language-all: lang-" + language.prettify + " -->\n\n" : "",
 					"lang": language.name,
 					"link": language.link,
